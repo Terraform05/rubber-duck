@@ -14,12 +14,18 @@ class JavaTutor:
 
     def __init__(self, client):
         # Create assistant
-        self.assistant = client.beta.assistants.create(
-            name="Java Tutor",
-            instructions="You are a personal computer science tutor for the language Java. When asked a question, explain the Java coding logic, structure, or syntax neded to solve the problem using only text as if you were speaking to a student. Be extremely concise and clear, asking questions to clarify the students understanding. Explain only the concepts simply and do not provide examples",
-            model="gpt-4-1106-preview",
-            tools=[{"type": "code_interpreter"}]
-        )
+        assistant_list = client.beta.assistants.list()
+        if (assistant_list.last_id != None):
+            self.assistant = client.beta.assistants.retrieve(assistant_list.last_id)
+            print('retreived assistant')
+        else:
+            self.assistant = client.beta.assistants.create(
+                name="Java Tutor",
+                instructions="You are a personal computer science tutor for the language Java. When asked a question, explain the Java coding logic, structure, or syntax neded to solve the problem using only text as if you were speaking to a student. Be extremely concise and clear, asking questions to clarify the students understanding. Explain only the concepts simply and do not provide examples",
+                model="gpt-4-1106-preview",
+                tools=[{"type": "code_interpreter"}]
+            )
+            print('new assistant')
         # Create thread
         self.thread = client.beta.threads.create()
 
@@ -60,7 +66,7 @@ class JavaTutor:
         thread_messages = self.get_thread_messages()
         last_assistant = {}
         last_user = {}
-        #print(highlight_string(thread_messages.data))
+        # print(highlight_string(thread_messages.data))
         for message in thread_messages.data[-2:]:
             content = message.content[0].text.value.replace("`", "'")
             if message.role == 'assistant':
@@ -77,24 +83,26 @@ class JavaTutor:
 
     # Ask a question to the assistant on this thread
     def ask_question(self, question=None):
+        client.beta.threads.messages.create
+        
         message = client.beta.threads.messages.create(
             thread_id=self.thread.id,
             role="user",
             content=get_question_by_speech(question=None)
         )
 
-    #speak response out loud
+    # speak response out loud
     def say_answer(self, answer):
         say(answer)
 
-    #delete assistant at end
+    # delete assistant at end
     def cleanup(self):
         client.beta.assistants.delete(
             assistant_id=self.assistant.id
         )
         print(client.beta.assistants.list())
 
-    #perform loop action of tutoring
+    # perform loop action of tutoring
     def do_tutoring(self):
         self.ask_question()
         self.run_assistant()
@@ -127,6 +135,6 @@ if __name__ == "__main__":
                 active_session = False
                 break
 
-    AlexGPTutor.cleanup()
+    # AlexGPTutor.cleanup()
 
     print('program end')

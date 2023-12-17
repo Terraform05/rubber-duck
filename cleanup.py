@@ -8,7 +8,7 @@ client = OpenAI(
 
 print(client.beta.assistants.list())
 
-for assistant in client.beta.assistants.list():
-    client.beta.assistants.delete(assistant.id)
+for ass in client.beta.assistants.list():
+    client.beta.assistants.delete(ass.id)
 
 print(client.beta.assistants.list())
