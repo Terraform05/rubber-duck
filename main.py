@@ -1,11 +1,12 @@
 from openai import OpenAI
 from sensitive import OPENAI_API_KEY, OPENAI_ORGANIZATION
 from get_question import get_question_by_speech
-import time
 from tts import say
-from helpers import highlight_string, highlight_print
+from helpers import *
 import sys
-from decorators import check_arguments
+import time
+
+
 
 @check_arguments(OpenAI)
 class JavaTutor:
@@ -18,7 +19,8 @@ class JavaTutor:
         # Create assistant
         assistant_list = client.beta.assistants.list()
         if (assistant_list.last_id != None):
-            self.assistant = client.beta.assistants.retrieve(assistant_list.last_id)
+            self.assistant = client.beta.assistants.retrieve(
+                assistant_list.last_id)
             print('retreived assistant')
         else:
             self.assistant = client.beta.assistants.create(
@@ -86,7 +88,7 @@ class JavaTutor:
     # Ask a question to the assistant on this thread
     def ask_question(self, question=None):
         client.beta.threads.messages.create
-        
+
         message = client.beta.threads.messages.create(
             thread_id=self.thread.id,
             role="user",
@@ -115,14 +117,14 @@ class JavaTutor:
 
 
 if __name__ == "__main__":
-     
+
     client = OpenAI(
         organization=OPENAI_ORGANIZATION,
         api_key=OPENAI_API_KEY
     )
-    
+
     AlexGPTutor = JavaTutor(client)
-   
+
     active_session = True
     while active_session == True:
 
