@@ -3,11 +3,13 @@ from sensitive import OPENAI_API_KEY, OPENAI_ORGANIZATION
 from get_question import get_question_by_speech
 import time
 from tts import say
-from other import highlight_string, highlight_print
+from helpers import highlight_string, highlight_print
 import sys
+from decorators import check_arguments
 
-
+@check_arguments(OpenAI)
 class JavaTutor:
+    """Methods for tutoring a student in Java using OpenAi's Beta Assistants API with GPT-4-1106-preview model"""
 
     assistant = None  # establish single assistant. Theoretically use same assistant for all threads, but I don't want to leave assistant open
     thread = None  # establish single thread
@@ -113,14 +115,14 @@ class JavaTutor:
 
 
 if __name__ == "__main__":
-
+     
     client = OpenAI(
         organization=OPENAI_ORGANIZATION,
         api_key=OPENAI_API_KEY
     )
-
+    
     AlexGPTutor = JavaTutor(client)
-
+   
     active_session = True
     while active_session == True:
 
@@ -135,6 +137,6 @@ if __name__ == "__main__":
                 active_session = False
                 break
 
-    # AlexGPTutor.cleanup()
+    AlexGPTutor.cleanup()
 
     print('program end')

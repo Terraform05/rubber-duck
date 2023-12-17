@@ -1,5 +1,5 @@
 from openai import OpenAI
-from handle_openai_obj import write_openai_obj_to_json_file, openai_response_to_json
+from testing.handle_openai_obj import write_openai_obj_to_json_file, openai_response_to_json
 from sensitive import OPENAI_ORGANIZATION, OPENAI_API_KEY
 
 client = OpenAI(
