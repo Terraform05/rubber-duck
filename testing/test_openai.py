@@ -10,8 +10,6 @@ client = OpenAI(
 MODEL = "gpt-3.5-turbo"
 
 
-
-
 #test of chat completion
 completions_response = client.chat.completions.create(
     model=MODEL,
@@ -26,8 +24,6 @@ completions_response = client.chat.completions.create(
 print('completions response:')
 print(openai_response_to_json(completions_response))
 write_openai_obj_to_json_file(completions_response)
-
-
 
 
 #test of moderation

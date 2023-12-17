@@ -1,8 +1,8 @@
 from tts import say
 from stt import listen
 
-
-def get_question_by_speech():
+#can override by passing in a question
+def get_question_by_speech(question = None):
     question = None
     recognized_audio = None
 
@@ -14,8 +14,9 @@ def get_question_by_speech():
         if recognized_audio != '':
 
             print(f'You asked: {recognized_audio}')
-            print(f'Would you like to proceed with this question?')
             say(f'You asked: {recognized_audio}')
+            
+            print(f'Would you like to proceed with this question? Yes or No')
             say(f'Would you like to proceed with this question? Yes or No')
 
             yes_or_no = ''
@@ -27,22 +28,19 @@ def get_question_by_speech():
                     question = recognized_audio
                     break
                 elif yes_or_no == 'no':
-                    print('Question misunderstanding...')
+                    print('Apologies... Please repeat your question.')
                     say('Apologies... Please repeat your question.')
                     break
 
                 else:
-                    print('Sorry, I did not understand that. Please say yes or no.')
-                    say('Sorry, I did not understand that. Please say yes or no.')
+                    print('Sorry, I didn\'t catch that. Please say yes or no.')
+                    say('Sorry, I didn\'t catch that Please say yes or no.')
 
-            # yes_or_no = input('Yes or No (y/n): ')
-
-    print('FINAL QUESTION')
-    print(question)
     return question
 
-
-def get_question_by_text():
+""" 
+# can override by passing in a question
+def get_question_by_text(question = None):
     question = None
     recognized_text = None
 
@@ -60,13 +58,10 @@ def get_question_by_text():
                 print('Proceeding...')
                 question = recognized_text
             else:
-                print('Question misunderstanding...')
-                print('Apologies... Please repeat your question.')
+                print('Sorry, I didn\'t catch that. Please say yes or no.')
+
+    return question """
 
 
-    print('FINAL QUESTION')
-    print(question)
-    return question
-
-
-get_question_by_speech()
+#get_question_by_speech()
+#get_question_by_text()
