@@ -1,8 +1,17 @@
-from tts import say
+#from tts import say
 from stt import listen
 
 #can override by passing in a question
 def get_question_by_speech(question = None):
+    """
+    Gets a question from the user through speech inquiry.
+    
+    Args:
+        question (str, optional): The user's question. If not provided, it is obtained by speech.
+        
+    Returns:
+        str: The user's question.
+    """
     question = None
     recognized_audio = None
 

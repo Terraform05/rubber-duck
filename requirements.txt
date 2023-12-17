@@ -1,0 +1,2 @@
+openai==1.5.0
+SpeechRecognition==3.10.1

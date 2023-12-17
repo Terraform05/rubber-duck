@@ -8,3 +8,12 @@ sensitive.py
 /.DS_Store
 /__pycache__
 /testing
+
+#sphinx
+/docs
+/_build
+/_static
+/_templates
+/make.bat
+/Makefile
+/index.rst
