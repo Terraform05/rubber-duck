@@ -58,13 +58,11 @@ class JavaTutor:
     # Get the most recent assistant answer from thread messages
     def get_last_message(self):
         thread_messages = self.get_thread_messages()
-        print(thread_messages)
         last_assistant = {}
         last_user = {}
-        print(type(thread_messages))
-        print(thread_messages.data)
-        for message in reversed(thread_messages.data[-2:]):
-            content = message.content[0].text.value
+        #print(highlight_string(thread_messages.data))
+        for message in thread_messages.data[-2:]:
+            content = message.content[0].text.value.replace("`", "'")
             if message.role == 'assistant':
                 last_assistant = (message.role, content)
             if message.role == 'user':
@@ -75,7 +73,7 @@ class JavaTutor:
     def print_last_message(self, last_assistant, last_user):
         print(highlight_string(last_user[0]+":\n")+last_user[1])
         print()
-        print(highlight_string(last_assistant[0]+":]n")+last_assistant[1])
+        print(highlight_string(last_assistant[0]+":\n")+last_assistant[1])
 
     # Ask a question to the assistant on this thread
     def ask_question(self, question=None):
@@ -85,22 +83,25 @@ class JavaTutor:
             content=get_question_by_speech(question=None)
         )
 
+    #speak response out loud
     def say_answer(self, answer):
         say(answer)
 
+    #delete assistant at end
     def cleanup(self):
         client.beta.assistants.delete(
             assistant_id=self.assistant.id
         )
         print(client.beta.assistants.list())
 
+    #perform loop action of tutoring
     def do_tutoring(self):
         self.ask_question()
         self.run_assistant()
         self.wait_on_run()
         last_assistant, last_user = self.get_last_message()
-        self.say_answer(last_assistant[1])
         self.print_last_message(last_assistant, last_user)
+        self.say_answer(last_assistant[1])
 
 
 if __name__ == "__main__":

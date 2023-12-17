@@ -9,7 +9,7 @@ def listen():
     try:
         with sr.Microphone() as mic:
             r = sr.Recognizer()
-            r.adjust_for_ambient_noise(mic, duration=0.5)  # Use the 'mic' instance here
+            r.adjust_for_ambient_noise(mic, duration=0.3)  # Use the 'mic' instance here
             audio = r.listen(mic)
             recognized_audio = r.recognize_google(audio).lower()
 

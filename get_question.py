@@ -12,12 +12,12 @@ def get_question_by_speech(question = None):
         recognized_audio = listen()
 
         if recognized_audio != '':
-
-            print(f'You asked: {recognized_audio}')
-            say(f'You asked: {recognized_audio}')
+            question = recognized_audio # skip confirmation
+            """ print(f'You asked: {recognized_audio}')
+            say(f'Did you ask: {recognized_audio}')
             
-            print(f'Would you like to proceed with this question? Yes or No')
-            say(f'Would you like to proceed with this question? Yes or No')
+            print(f'Yes or No')
+            say(f'Yes or No')
 
             yes_or_no = ''
             while yes_or_no != 'yes' or yes_or_no != 'no':
@@ -34,7 +34,7 @@ def get_question_by_speech(question = None):
 
                 else:
                     print('Sorry, I didn\'t catch that. Please say yes or no.')
-                    say('Sorry, I didn\'t catch that Please say yes or no.')
+                    say('Sorry, I didn\'t catch that Please say yes or no.') """
 
     return question
 

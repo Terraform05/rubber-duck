@@ -6,6 +6,8 @@ client = OpenAI(
     api_key=OPENAI_API_KEY
 )
 
+print(client.beta.assistants.list())
+
 for assistant in client.beta.assistants.list():
     client.beta.assistants.delete(assistant.id)
 
