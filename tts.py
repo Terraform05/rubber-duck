@@ -9,4 +9,4 @@ def say(text, voice = 'Ava (Premium)'):
    
 #names = ['Allison (Enhanced)', 'Ava (Premium)', 'Evan (Enhanced)', 'Samantha (Enhanced)', 'Siri', 'Isha (Premium)', 'Rishi (Enhanced)']
 #for name in names:
-#    say(f'I am {name}.', name)
+#    say(f'Hi I\'m {name}', name)
