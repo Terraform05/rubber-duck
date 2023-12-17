@@ -69,4 +69,4 @@ def get_question_by_text():
     return question
 
 
-get_question_by_text()
+get_question_by_speech()
