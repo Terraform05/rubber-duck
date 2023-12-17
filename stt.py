@@ -10,7 +10,6 @@ def listen():
         with sr.Microphone() as mic:
             r = sr.Recognizer()
             r.adjust_for_ambient_noise(mic, duration=0.5)  # Use the 'mic' instance here
-            print('Adjusted for ambient noise')
             audio = r.listen(mic)
             recognized_audio = r.recognize_google(audio).lower()
 
@@ -18,7 +17,7 @@ def listen():
         print("Could not request results; {0}".format(e))
 
     except sr.UnknownValueError:
-        print("Unknown error occurred")
+        print("Still listening...")
 
     return recognized_audio
 
