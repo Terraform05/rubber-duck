@@ -1,9 +1,12 @@
 import speech_recognition as sr
 
-from tts import say
-r = sr.Recognizer()
-
 def listen():
+    """
+    Listens to audio through the microphone and transcribes it using Google Speech Recognition.
+
+    Returns:
+        str: The transcribed text from the speech, converted to lowercase.
+    """
     recognized_audio = ''
 
     try:
@@ -23,7 +26,11 @@ def listen():
 
 
 # parrot listen and speak back to user
-""" while True:
+""" 
+from tts import say
+r = sr.Recognizer()
+
+while True:
     print("Listening... (Ctrl+C to exit)")
     try:
         with sr.Microphone() as source2:
