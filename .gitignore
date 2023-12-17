@@ -1,4 +1,10 @@
+# .gitignore
+
+#keys
+sensitive.py
+
+#unnecessary files
 /responses
 /.DS_Store
 /__pycache__
-sensitive.py
+/testing
